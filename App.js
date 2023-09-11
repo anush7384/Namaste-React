@@ -1,25 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const tree = React.createElement("div", { id: "parent" }, [
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", {}, "Hello H1"),
-    React.createElement("h2", {}, "Hello H2"),
-  ]),
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", {}, "Hello H1"),
-    React.createElement("h2", {}, "Hello H2"),
-  ]),
-]);
+//JSX (transpiled before it reaches the JS) - PARCEL - Babel
 
-const heading = React.createElement(
-  "h1",
-  { id: "heading", xyz: "abc" },
-  "Hello world from React!"
+//JSX =>React.createElement => ReactElement-JS Object => HTMLelement(render)
+//Babel is doing this conversion from JSX to React.createElement
+
+const jsxHeading = (
+  <h1 className="head" id="heading">
+    Namaste React using JSX :)
+  </h1>
 );
 
-console.log(tree); // object
+console.log(jsxHeading);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(tree);
+root.render(jsxHeading);
