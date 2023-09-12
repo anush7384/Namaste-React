@@ -1,19 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-//JSX (transpiled before it reaches the JS) - PARCEL - Babel
-
-//JSX =>React.createElement => ReactElement-JS Object => HTMLelement(render)
-//Babel is doing this conversion from JSX to React.createElement
-
-const jsxHeading = (
+//React Element
+const Title = () => (
   <h1 className="head" id="heading">
-    Namaste React using JSX :)
+    Namaste React using JSX
   </h1>
 );
 
-console.log(jsxHeading);
+// React Functional Component
+// Component Composition
+const HeadingComponent = () => (
+  <div id="container">
+    <Title />
+    <h1 className="heading">Namaste React from functional component</h1>
+  </div>
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(jsxHeading);
+root.render(<HeadingComponent />);
