@@ -5,6 +5,10 @@ import { resList } from "../utils/mockData";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
+
+  const [searchText, setSearchText] = useState("");
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -22,15 +26,40 @@ const Body = () => {
         const resData =
           cardObj.card?.card?.gridElements?.infoWithStyle?.restaurants;
         setListOfRestaurants(resData);
+        setFilteredRestaurant(resData);
       }
     }
   };
 
-  if (listOfRestaurants.length === 0) return <h1>Loading....</h1>;
+  if (filteredRestaurant.length === 0) return <h1>Loading....</h1>;
 
   return (
     <div className="body">
       <div className="filter">
+        <div className="search">
+          <input
+            type="text"
+            className="search-box"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              const filteredRest = listOfRestaurants.filter((rest) =>
+                rest.info.name.toLowerCase().includes(searchText.toLowerCase())
+              );
+
+              setFilteredRestaurant(filteredRest);
+
+              console.log(searchText);
+              setSearchText("");
+            }}
+          >
+            Search
+          </button>
+        </div>
         <button
           className="filter-btn"
           onClick={() => {
@@ -44,7 +73,7 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {listOfRestaurants.map((restaurant) => (
+        {filteredRestaurant.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
